@@ -6,7 +6,7 @@
 #    By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/09 20:16:52 by ohaker            #+#    #+#              #
-#    Updated: 2026/02/09 20:17:06 by ohaker           ###   ########.fr        #
+#    Updated: 2026/02/18 20:37:51 by ohaker           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME = phonebook
 CC = c++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
-SRC = phonebook.cpp
+SRC = phonebook.cpp \
+	contact.cpp
 OBJS = $(SRC:.cpp=.o)
 
 # Color definitions for terminal output
