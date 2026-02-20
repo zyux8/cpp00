@@ -12,6 +12,7 @@ class Contact {
 		std::string number;
 		std::string secret;
 	public:
+		Contact();
 		std::string get_name();
 		std::string get_surname();
 		std::string get_nickname();

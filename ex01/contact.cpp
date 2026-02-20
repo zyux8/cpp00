@@ -1,5 +1,13 @@
 #include "phonebook.hpp"
 
+Contact::Contact() {
+	// name = "NULL";
+	// surname = "NULL";
+	// nickname = "NULL";
+	// number = "NULL";
+	// secret = "NULL";
+}
+
 std::string Contact::get_name() {
 	return this->name;
 }
