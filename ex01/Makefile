@@ -6,13 +6,13 @@
 #    By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/09 20:16:52 by ohaker            #+#    #+#              #
-#    Updated: 2026/02/18 20:37:51 by ohaker           ###   ########.fr        #
+#    Updated: 2026/02/22 17:14:20 by ohaker           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = phonebook
-CC = c++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
 SRC = phonebook.cpp \
 	contact.cpp
@@ -27,13 +27,13 @@ ORANGE		= \033[33;01m
 .SILENT:
 
 %.o: %.cpp
-	@$(CC) $(CPPFLAGS) -c $< -o $@
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	echo "$(ORANGE)		- Compiling $(NAME)...$(NONE)"
-	@$(CC) $(CPPFLAGS) $^ -o $(NAME)
+	@$(CXX) $(CXXFLAGS) $^ -o $(NAME)
 	echo "$(GREEN)		- $(NAME) Compiled -$(NONE)"
 
 fclean: clean

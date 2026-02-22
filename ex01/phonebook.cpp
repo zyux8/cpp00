@@ -73,13 +73,11 @@ void Phonebook::display_phonebook() {
 	print_line();
 	std::cout << "| Index    | Name     | Surname  | Nickname |" << std::endl;
 	for (int x = 0; x < 8; x++) {
-		// if (!this->contact[x].get_name().empty()) {
 			std::cout << "| " << x << "        |";
 			print10(this->contact[x].get_name());
 			print10(this->contact[x].get_surname());
 			print10(this->contact[x].get_nickname());
 			std::cout << std::endl;
-		// }
 	}
 	print_line();
 }
