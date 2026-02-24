@@ -5,8 +5,10 @@ Phonebook::Phonebook() {
 }
 
 bool valid_number(std::string input) {
+	if (input.empty())
+		return false;
 	for (int x = 0; input[x]; x++) {
-		if ((input[x] >= '0' && input[x] <= '9') || input[x] == '+' || input[x] == '-')
+		if ((input[x] >= '0' && input[x] <= '9') || input[x] == '+' || input[x] == '-' || input[x] == ' ')
 			continue;
 		else 
 			return false;
@@ -22,32 +24,44 @@ void Phonebook::add_contact(Contact new_contact) {
 	contact_count++;
 }
 
-void read_contact(Phonebook &pb) {
+bool get_string(std::string msg, std::string &output) {
+	while (1) {
+		std::cout << msg;
+		if (!std::getline(std::cin, output)) {
+			std::cin.clear();
+			return false;
+		}
+		if (output.empty())
+			continue;
+		else
+			return true;
+	}
+}
+
+bool read_contact(Phonebook &pb) {
 	std::string input;
 	Contact contact;
 
-	std::cout << "Enter the Name of the contact: ";
-	while (std::getline(std::cin, input) && input.empty())
-		std::cout << "Enter the Name of the contact: ";
+	if (!get_string("Enter the Name of the contact: ", input))
+		return false;
 	contact.set_name(input);
-	std::cout << "Enter the Last Name of the contact: ";
-	while (std::getline(std::cin, input) && input.empty())
-		std::cout << "Enter the Last Name of the contact: ";
+	if (!get_string("Enter the Last Name of the contact: ", input))
+		return false;
 	contact.set_surname(input);
-	std::cout << "Enter the Nickname of the contact: ";
-	while (std::getline(std::cin, input) && input.empty())
-		std::cout << "Enter the Nickname of the contact: ";
+	if (!get_string("Enter the Nickname of the contact: ", input))
+		return false;
 	contact.set_nickname(input);
-	std::cout << "Enter the Number of the contact: ";
-	while (std::getline(std::cin, input) && !valid_number(input))
-		std::cout << "Enter the Number of the contact: ";
+	while(!valid_number(input)) {
+		if (!get_string("Enter the Number of the contact: ", input))
+			return false;
+	}
 	contact.set_number(input);
-	std::cout << "Enter the Hilarious Secret of the contact >:]" << std::endl;
-	while (std::getline(std::cin, input) && input.empty())
-		std::cout << "Enter the Hilarious Secret of the contact >:]" << std::endl;
+	if (!get_string("Enter the Hilarious Secret of the contact >:]\n", input))
+		return false;
 	contact.set_secret(input);
-	std::cout << "Contact saved as " << std::endl;
+	std::cout << "Contact saved" << std::endl;
 	pb.add_contact(contact);
+	return true;
 }
 
 void print_line() {
@@ -124,7 +138,7 @@ void testing(Phonebook &pb) {
 		Contact con;
 		con.set_name("test");
 		con.set_surname("surtest");
-		con.set_nickname("nicktest");
+		con.set_nickname("nicknametest");
 		con.set_number("test69");
 		con.set_secret("secrettest");
 		pb.add_contact(con);
@@ -137,15 +151,20 @@ int main() {
 
 	while (1) {
 	std::cout << "Hello sir: ";
-	std::getline(std::cin, input);
-	if (input == "ADD")
-		read_contact(pb);
+	if (!std::getline(std::cin, input))
+		return (1);
+	if (input == "ADD") {
+		if (!read_contact(pb))
+			return 1;
+	}
 	else if (input == "SEARCH")
 		search_contact(pb);
 	else if (input == "test")
 		testing(pb);
 	else if (input == "EXIT")
 		break;
+	else
+		continue;
 	}
 	return 0;
 }
